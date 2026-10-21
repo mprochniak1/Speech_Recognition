@@ -10,11 +10,11 @@
 
 ## 1. Cel ćwiczenia
 
-Celem ćwiczenia było zamienienie trzech własnych nagrań mowy na reprezentacje log-mel i MFCC, porównanie ich między nagraniami oraz sprawdzenie, jak długość okna (`n_fft`) i krok ramkowania (`hop_length`) zmieniają spektrogram. Nagrania mają rosnącą złożoność: samogłoska „a”, wyraz „muzyka” i zdanie „Mały pies głośno szczekał, kiedy zobaczył kota”.
+Celem ćwiczenia było zamienienie trzech własnych nagrań mowy na reprezentacje log-mel i MFCC, porównanie ich między nagraniami oraz sprawdzenie, jak długość okna (n_fft) i krok ramkowania (hop_length) zmieniają spektrogram. Nagrania mają rosnącą złożoność: samogłoska „a”, wyraz „muzyka” i zdanie „Mały pies głośno szczekał, kiedy zobaczył kota”.
 
 ## 2. Metoda i implementacja
 
-Nagrania mp3 wczytano przez `librosa.load` do 16 kHz mono. Log-mel liczono przez `melspectrogram` i `power_to_db(ref=np.max)`, a MFCC z tej samej macierzy (`mfcc(S=S_db)`), więc obie reprezentacje mają wspólną oś czasu. Ustawienia podstawowe: `n_fft = 512` (32 ms), `hop_length = 160` (10 ms), 64 pasma mel, 13 współczynników MFCC. W eksperymentach zmieniano jeden parametr naraz: `n_fft` = 256, 512, 1024 oraz `hop_length` = 80, 160, 320, przy wspólnej skali barw od -80 do 0 dB.
+Nagrania mp3 wczytano przez librosa.load do 16 kHz mono. Log-mel liczono przez melspectrogram i power_to_db(ref=np.max), a MFCC z tej samej macierzy (mfcc(S=S_db)), więc obie reprezentacje mają wspólną oś czasu. Ustawienia podstawowe: n_fft = 512 (32 ms), hop_length = 160 (10 ms), 64 pasma mel, 13 współczynników MFCC. W eksperymentach zmieniano jeden parametr naraz: n_fft = 256, 512, 1024 oraz hop_length = 80, 160, 320, przy wspólnej skali barw od -80 do 0 dB.
 
 **Kod.** Cały kod, wyniki i wykresy (Rys. 1-5) są w notatniku `lab1_Maciej_Próchniak.ipynb`.
 
@@ -41,7 +41,7 @@ Nagrania mp3 wczytano przez `librosa.load` do 16 kHz mono. Log-mel liczono przez
 | „z” - muzyka | 0,38-0,44 | -315,5 | -25,9 | 63,3 | -1,1 | 13,6 |
 | cisza | 1,00-1,50 | -640,0 | 0,0 | 0,0 | 0,0 | 0,0 |
 
-Przy `n_fft` = 256, 512 i 1024 STFT zdania ma 129, 257 i 513 prążków, a log-mel zawsze [64, 362] (Rys. 4). Przy `hop_length` = 80, 160 i 320 liczba ramek wynosi 365, 183 i 92 dla nagrań 1,82 s oraz 723, 362 i 181 dla zdania (Rys. 5), zgodnie ze wzorem T = 1 + ⌊N / hop_length⌋.
+Przy n_fft = 256, 512 i 1024 STFT zdania ma 129, 257 i 513 prążków, a log-mel zawsze [64, 362] (Rys. 4). Przy hop_length = 80, 160 i 320 liczba ramek wynosi 365, 183 i 92 dla nagrań 1,82 s oraz 723, 362 i 181 dla zdania (Rys. 5), zgodnie ze wzorem T = 1 + ⌊N / hop_length⌋.
 
 ## 4. Analiza i interpretacja
 
@@ -61,4 +61,4 @@ Przy `n_fft` = 256, 512 i 1024 STFT zdania ma 129, 257 i 513 prążków, a log-m
 
 ## 5. Wnioski
 
-Log-mel jest czytelniejszy wzrokowo niż MFCC: widać na nim harmoniczne, formanty, szumy, zwarcia i pauzy. MFCC (13 zamiast 64 wartości na ramkę) dobrze oddzielają głównie głoski dźwięczne od szumowych i ciszę, a różnice między samogłoskami widać raczej w liczbach niż na wykresie. W pojedynczej samogłosce widać głównie barwę głoski, a w wyrazie i zdaniu dochodzą zmiany w czasie: zwarcia, przejścia między głoskami i intonacja, więc kolejność ramek niesie istotną informację. `n_fft` wyznacza kompromis między rozdzielczością w czasie i w częstotliwości, a `hop_length` zmienia głównie liczbę ramek.
+Log-mel jest czytelniejszy wzrokowo niż MFCC: widać na nim harmoniczne, formanty, szumy, zwarcia i pauzy. MFCC (13 zamiast 64 wartości na ramkę) dobrze oddzielają głównie głoski dźwięczne od szumowych i ciszę, a różnice między samogłoskami widać raczej w liczbach niż na wykresie. W pojedynczej samogłosce widać głównie barwę głoski, a w wyrazie i zdaniu dochodzą zmiany w czasie: zwarcia, przejścia między głoskami i intonacja, więc kolejność ramek niesie istotną informację. n_fft wyznacza kompromis między rozdzielczością w czasie i w częstotliwości, a hop_length zmienia głównie liczbę ramek.
