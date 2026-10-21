@@ -16,7 +16,7 @@ Celem ćwiczenia było zamienienie trzech własnych nagrań mowy na reprezentacj
 
 Nagrania mp3 wczytano przez librosa.load do 16 kHz mono. Log-mel liczono przez melspectrogram i power_to_db(ref=np.max), a MFCC z tej samej macierzy (mfcc(S=S_db)), więc obie reprezentacje mają wspólną oś czasu. Ustawienia podstawowe: n_fft = 512 (32 ms), hop_length = 160 (10 ms), 64 pasma mel, 13 współczynników MFCC. W eksperymentach zmieniano jeden parametr naraz: n_fft = 256, 512, 1024 oraz hop_length = 80, 160, 320, przy wspólnej skali barw od -80 do 0 dB.
 
-**Kod.** Cały kod, wyniki i wykresy (Rys. 1-5) są w notatniku `lab1_Maciej_Próchniak.ipynb`.
+**Kod.** Cały kod znajduje się w pliku `lab1_Maciej_Próchniak.ipynb` w repozytorium: https://github.com/mprochniak1/Speech_Recognition
 
 ## 3. Wyniki
 
